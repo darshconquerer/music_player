@@ -6,6 +6,51 @@
     <title>My Music Player</title>
 </head>
 <body>
-    <h1>My Music Player</h1>
+    <div class = 'sidebar'>
+        <div class = 'name'>Pioneer
+            <div class="navigation_option">
+                <a href = '#'>Home</a>
+                <a href = '#'>Search</a>
+                <a href= "#">Library</a>
+            </div>
+        </div>
+        <div class = 'playlist-container'>
+            <ul class = 'playlists'>
+                <li>Liked Songs</li>
+                <li>Recently Played</li>
+                <li>Top Hits</li>
+                <li>Coding</li>
+                <li>Focus</li>
+                <li>Calm</li>
+            </ul>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="header">
+            <input type="text" class="search-bar" placeholder="Search song...">
+        </div>
+        <div class="body">
+            <h1>Lofi Music</h1>
+            <h3>Just chill</h3>
+            <button class="body_button">Play</button>
+        </div>
+    </div>
+    <div class="base">
+        <div class="playing_now">
+            <div class = song_title>Choose</div>
+        </div>
+        <div class="icons">
+            <div class="buttons">
+                <button class = previous_button>⏮</button>
+                <button class="play_button">▶</button>
+                <button class="next_button">⏭</button>
+            </div>
+        </div>
+        <div class="audio_bar">
+            <span class="current_time">0:00</span>
+            <input type="range" class="audio_prog_bar" min="0" max="100" step="0.1" value="0">
+            <span class="total_time">0:00</span>
+        </div>
+    </div>
 </body>
 </html>
