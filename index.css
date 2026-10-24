@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: rgb(11, 11, 26);
+    color: white;
+}
+.sidebar{
+    top: 0;
+    left: 0;
+    bottom: 90px;
+    width: 250px;
+    background-color: rgb(18, 18, 24);
+    padding: 24px 16px;
+}
+.name{
+    font-size: 24px;
+    font-weight: bold;
+}
+.navigation_option{
+    margin-top: 24px;
+}
+.navigation_option a{
+    display: block;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: normal;
+    color: (154 154 181);
+    text-decoration: none;
+}
+.navigation_option a:hover{
+    color: white;
+    background-color: rgb(37, 35, 77);
+}
+.playlist-container {
+    margin-top: 30px;
+}
+.playlists{
+    list-style: none;
+}
+.playlists li{
+    padding: 10px 12px;
+    color: rgb(154 154 181);
+}
+.playlists li:hover{
+    color: white;
+    background-color: rgb(37, 35, 77) ;
+}
+.main-container{
+    margin: 0 0 90px 250px;
+    padding: 20px 28px;
+}
+.body{
+    padding: 70px 32px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgb(43, 16, 85), rgb(123, 45, 142), rgb(255, 126, 95));
+}
+.body h1{
+    font-size: 56px;
+}
+.body h3{
+    margin: 8px 0 20px;
+    font-weight: normal;
+}
+.body_button{
+    
+}
