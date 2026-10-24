@@ -10,6 +10,7 @@ body{
     color: white;
 }
 .sidebar{
+    position: fixed;
     top: 0;
     left: 0;
     bottom: 90px;
@@ -30,7 +31,7 @@ body{
     border-radius: 8px;
     font-size: 16px;
     font-weight: normal;
-    color: (154 154 181);
+    color: rgb(154 154 181);
     text-decoration: none;
 }
 .navigation_option a:hover{
@@ -46,6 +47,8 @@ body{
 .playlists li{
     padding: 10px 12px;
     color: rgb(154 154 181);
+    border-radius: 8px;
+    cursor: pointer;
 }
 .playlists li:hover{
     color: white;
@@ -68,5 +71,69 @@ body{
     font-weight: normal;
 }
 .body_button{
-    
+    padding: 12px 30px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.base{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: rgb(18, 18, 42);
+    border-top: 1px solid rgb(30, 30, 60) ;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 0 24px;
+}
+.playing_now{
+    width: 220px;
+}
+.song_title{
+    font-weight: bold;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+.previous_button, .next_button{
+    background: none;
+    border: none;
+    color: rgb(154 154 181);
+    font-size: 20px;
+    cursor: pointer;
+}
+.previous_button:hover, .next_button:hover{
+    color: white;
+}
+.play_button{
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    background-color: white;
+    color:black;
+    cursor: pointer;
+}
+.audio_bar{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: rgb(154 154 181);
+}
+.audio_prog_bar{
+    flex: 1;
+    accent-color: rgb(124, 92, 255);
+    cursor: pointer;
 }
