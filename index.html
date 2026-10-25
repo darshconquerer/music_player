@@ -33,12 +33,17 @@
         </div>
         <div class="song_list">
             <h2>Songs</h2>
+            <div class="add-song-container">
+                <input type="text" id = "new_song_title" placeholder = "Song Title">
+                <input type="file" id="new_song_file" accept="audio/*">
+                <button id="add_song_btn">Add</button>
+            </div>
             <ul class="songs"></ul>
         </div>
     </div>
     <div class="base">
         <div class="playing_now">
-            <div class = song_title>Choose</div>
+            <div class = song_title>FOMO</div>
         </div>
         <div class="icons">
             <div class="buttons">
@@ -53,6 +58,7 @@
             <span class="total_time">0:00</span>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>

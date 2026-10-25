@@ -91,10 +91,9 @@ body{
     list-style: none;
 }
 .songs li{
-    padding: 12px;
-    color: rgb(154 154 181);
-    border-radius: 8px;
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .songs li:hover{
     color: white;
@@ -156,4 +155,42 @@ body{
     flex: 1;
     accent-color: rgb(124, 92, 255);
     cursor: pointer;
+}
+.add-song-container{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.add-song-container input[type = "text"],
+.add-song-container input[type="file"]{
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    background-color: rgb(37, 35, 77);
+    color: white;
+    font-size: 14px;
+}
+.add-song-container button{
+    padding: 18px 16px;
+    border-radius: 50%;
+    border: none;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+.add-song-container button:hover{
+    background-color: rgb(200, 200, 200)
+}
+.delete_btn{
+    background: none;
+    border: none;
+    color: rgb(154 154 181);
+    cursor: pointer;
+    font-size: 12px;
+    padding: 4px;
+}
+.delete_btn:hover{
+    color: rgb(255, 95, 95);
+    transform: scale(1.2);
 }
