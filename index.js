@@ -1,3 +1,59 @@
+const comicOverlay = document.getElementById("comic_overlay");
+const minigameOverlay = document.getElementById("minigame_overlay");
+const panels = document.querySelectorAll(".comic_panel");
+const instructionText = document.querySelector(".comic_instruction");
+
+let currentPanelIndex = 0;
+
+function preloadImage(index){
+    if(index < panels.length){
+        const img = panels[index].querySelector('img');
+        const preloader = new Image();
+        preloader.src = img.src;
+    }
+}
+preloadImage(1);
+
+comicOverlay.addEventListener("click", () => {
+    panels[currentPanelIndex].classList.remove("active");
+    currentPanelIndex++;
+
+    if(currentPanelIndex < panels.length){
+        panels[currentPanelIndex].classList.add("active");
+        preloadImage(currentPanelIndex + 1);
+
+        if(currentPanelIndex === panels.length - 1){
+            instructionText.textContent = "Click to access the terminal...";
+        }
+    }
+    else{
+        launchMinigame();
+    }
+});
+
+function launchMinigame(){
+    instructionText.style.display = "none";
+    minigameOverlay.style.display = "flex";
+    comicOverlay.style.opacity = "0";
+
+    setTimeout(() =>{
+        comicOverlay.style.display = "none";
+    }, 800);
+}
+const memoryGrid = document.getElementById("memory_grid");
+const symbols = ['🎧', '📻', '🎹', '🎸'];
+let cardsArray = [...symbols, ...symbols];
+
+let firstCard = null;
+let secondCar = null;
+let lockBoard = false;
+let matchesFound = 0;
+
+cardsArray.sort(() => 0.5 - Math.random());
+cardsArray.forEach((symbol) => {
+    const card = document.createElement("div")
+})
+
 let songs = [];
 localforage.getItem("mySavedSongs").then(function(savedSongs){
     if(!savedSongs || savedSongs.length === 0){
@@ -15,7 +71,20 @@ localforage.getItem("mySavedSongs").then(function(savedSongs){
     }
     renderSongs();
     loadSong(0);
-})
+});
+
+const customAlert = document.getElementById("custom_alert");
+const customAlertText = document.getElementById("custom_alert_text");
+const closeAlertBtn = document.getElementById("close_alert_btn");
+
+function showCustomAlert(message){
+    customAlertText.textContent = message;
+    customAlert.classList.remove("hidden");
+}
+
+closeAlertBtn.addEventListener("click", function(){
+    customAlert.classList.add("hidden");
+});
 
 const songTitle = document.querySelector(".song_title");
 const songList = document.querySelector(".songs");
@@ -123,7 +192,7 @@ function renderSongs(){
         const li = document.createElement("li");
 
         const titleSpan = document.createElement("span");
-        li.textContent = (i+1) + ". " + songs[i].title;
+        titleSpan.textContent = (i+1) + ". " + songs[i].title;
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "❌";
         deleteButton.className = "delete_btn";
@@ -152,7 +221,7 @@ function renderSongs(){
             });
         });
         li.appendChild(titleSpan);
-        li.appendChild(deleteBtn);
+        li.appendChild(deleteButton);
         songList.appendChild(li);
     }
 }
@@ -170,7 +239,7 @@ addSongBtn.addEventListener("click", function(){
                 newSongTitle.value = "";
                 newSongFile.value = "";
             }).catch(function(err){
-                alert("Error saving file");
+                showCustomAlert("Error saving file");
                 console.error(err);
                 songs.pop();
             })
@@ -178,6 +247,6 @@ addSongBtn.addEventListener("click", function(){
         reader.readAsDataURL(file);
     }
     else{
-        alert("Please enter title and select file");
+        showCustomAlert("Please enter title and select file");
     }
 });

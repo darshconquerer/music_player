@@ -7,57 +7,83 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class = 'sidebar'>
-        <div class = 'name'>Pioneer
-            <div class="navigation_option">
-                <a href = '#'>Home</a>
-                <a href= "#">Library</a>
-            </div>
+    <div id = "comic_overlay">
+        <div class = "comics_instruction">Click anywhere to continue...</div>
+        <div class="comic_panel active">
+            <img src="images/one.png" alt="Comic page 1">
         </div>
-        <div class = 'playlist-container'>
-            <ul class = 'playlists'>
-                <li>Liked Songs</li>
-                <li>Recently Played</li>
-                <li>Top Hits</li>
-                <li>Coding</li>
-                <li>Focus</li>
-                <li>Calm</li>
-            </ul>
+        <div class="comic_panel">
+            <img src="images/two.png" alt="Comic Page 2">
         </div>
-    </div>
-    <div class="main-container">
-        <div class="body">
-            <h1>SONgs</h1>
-            <h3>Click Play</h3>
-            <button class="body_button">Play</button>
+        <div class="comic_panel">
+            <img src="images/three.png" alt="Comic Page 3">
         </div>
-        <div class="song_list">
-            <h2>Songs</h2>
-            <div class="add-song-container">
-                <input type="text" id = "new_song_title" placeholder = "Song Title">
-                <input type="file" id="new_song_file" accept="audio/*">
-                <button id="add_song_btn">Add</button>
-            </div>
-            <ul class="songs"></ul>
+        <div class="comic_panel">
+            <img src="images/four.png" alt="Comic Page 4">
+        </div>
+        <div class="comic_panel">
+            <img src="images/five.png" alt="Comic Page 5">
         </div>
     </div>
-    <div class="base">
-        <div class="playing_now">
-            <div class = song_title>FOMO</div>
-        </div>
-        <div class="icons">
-            <div class="buttons">
-                <button class = previous_button>⏮</button>
-                <button class="play_button">▶</button>
-                <button class="next_button">⏭</button>
-            </div>
-        </div>
-        <div class="audio_bar">
-            <span class="current_time">0:00</span>
-            <input type="range" class="audio_prog_bar" min="0" max="100" step="0.1" value="0">
-            <span class="total_time">0:00</span>
+
+    <div id="minigame_overlay" style="display: none;">
+        <div class="game_ui">
+            <h2>System Locked</h2>
+            <p>Match the pairs to save yourselves</p>
+            <div class="memory_grid" id="memory_grid"></div>
         </div>
     </div>
+
+    <div id="pioneer_app" style="display: none;">
+        <div class = 'sidebar'>
+            <div class = 'name'>Pioneer
+                <div class="navigation_option"></div>
+            </div>
+            <div class = 'playlist-container'></div>
+            <div class="sidebar-controls">
+                <div class="playing_now">
+                    <div class = song_title>Choose a song</div>
+                </div>
+                <div class="icons">
+                    <div class="buttons">
+                        <button class = previous_button>⏮</button>
+                        <button class="play_button">▶</button>
+                        <button class="next_button">⏭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="body">
+                <h1>SONgs</h1>
+                <h3>Click Play</h3>
+                <button class="body_button">Play</button>
+            </div>
+            <div class="song_list">
+                <h2>Songs</h2>
+                <div class="add-song-container">
+                    <input type="text" id = "new_song_title" placeholder = "Song Title">
+                    <input type="file" id="new_song_file" accept="audio/*">
+                    <button id="add_song_btn">Add</button>
+                </div>
+                <ul class="songs"></ul>
+            </div>
+        </div>
+
+        <div id="custom_alert" class="custom-alert hidden">
+            <span id="custom_alert_text"></span>
+            <button id="close_alert_btn">Ok</button>
+        </div>
+
+        <div class="base">
+            <div class="audio_bar">
+                <span class="current_time">0:00</span>
+                <input type="range" class="audio_prog_bar" min="0" max="100" step="0.1" value="0">
+                <span class="total_time">0:00</span>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
     <script src="index.js"></script>
 </body>

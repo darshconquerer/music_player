@@ -9,14 +9,92 @@ body{
     background-color: rgb(11, 11, 26);
     color: white;
 }
+#comic_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(11, 11, 26);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.8s ease;
+}
+.comic_panel{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    pointer-events: none;
+}
+.comic_panel.active{
+    opacity: 1;
+}
+.comic_panel img{
+    max-width: 95vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+}
+.comic_instruction{
+    position: absolute;
+    bottom: 20px;
+    color: rgb(154 154 181);
+    font-size: 16px;
+    letter-spacing: 1px;
+    z-index: 10001;
+    animation: pulse 2s infinite;
+    pointer-events: none;
+}
+@keyframes pulse {
+    0%, 100% {opacity: 0.3;}
+    50% {opacity: 1;}
+}
+
+#minigame_overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(11, 11, 26);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease;
+}
+
 .sidebar{
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 90px;
+    bottom: 60px;
     width: 250px;
     background-color: rgb(18, 18, 24);
     padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-controls{
+    margin-top: auto;
+    background-color: rgb(28, 28, 40);
+    padding: 20px 15px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 .name{
     font-size: 24px;
@@ -55,7 +133,7 @@ body{
     background-color: rgb(37, 35, 77) ;
 }
 .main-container{
-    margin: 0 0 90px 250px;
+    margin: 0 0 60px 250px;
     padding: 20px 28px;
 }
 .body{
@@ -104,16 +182,21 @@ body{
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 90px;
+    height: 60px;
     background-color: rgb(18, 18, 42);
     border-top: 1px solid rgb(30, 30, 60) ;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 24px;
     padding: 0 24px;
 }
 .playing_now{
     width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 .song_title{
     font-weight: bold;
@@ -138,17 +221,21 @@ body{
     height: 48px;
     border: none;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: white;
     color:black;
     cursor: pointer;
 }
 .audio_bar{
-    flex: 1;
+    width: 100%;
+    max-width: 800px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 12px;
+    gap: 15px;
+    font-size: 14px;
     color: rgb(154 154 181)
 }
 .audio_prog_bar{
@@ -160,6 +247,7 @@ body{
     display: flex;
     gap: 10px;
     margin-bottom: 16px;
+    align-items: center;
 }
 .add-song-container input[type = "text"],
 .add-song-container input[type="file"]{
@@ -193,4 +281,31 @@ body{
 .delete_btn:hover{
     color: rgb(255, 95, 95);
     transform: scale(1.2);
+}
+.custom-alert{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 95, 95);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0 , 0, 0.5);
+}
+.custom-alert.hidden{
+    display: none;
+}
+.custom-alert button{
+    background: white;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
 }
