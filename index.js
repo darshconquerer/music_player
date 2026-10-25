@@ -45,14 +45,75 @@ const symbols = ['🎧', '📻', '🎹', '🎸'];
 let cardsArray = [...symbols, ...symbols];
 
 let firstCard = null;
-let secondCar = null;
+let secondCard = null;
 let lockBoard = false;
 let matchesFound = 0;
 
 cardsArray.sort(() => 0.5 - Math.random());
 cardsArray.forEach((symbol) => {
-    const card = document.createElement("div")
-})
+    const card = document.createElement("div");
+    card.classList.add("memory_card");
+    card.dataset.symbol = symbol;
+
+    card.innerHTML = `<div class="front">?</div>
+    <div class = "back">${symbol}</div>
+    `;
+    card.addEventListener("click", flipCard);
+    if(memoryGrid) memoryGrid.appendChild(card);
+});
+function flipCard(){
+    if(lockBoard) return;
+    if(this == firstCard) return;
+
+    this.classList.add("flipped");
+    if(!firstCard){
+        firstCard = this;
+        return;
+    }
+    secondCard = this;
+    checkForMatch();
+}
+function checkForMatch(){
+    let isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
+
+    if(isMatch){
+        disableCards();
+        matchesFound++;
+        if(matchesFound === symbols.length){
+            setTimeout(unlockPioneer, 600);
+        }
+    }
+    else{
+        unflipCards();
+    }
+}
+function disableCards(){
+    firstCard.removeEventListener("click", flipCard);
+    secondCard.removeEventListener("click", flipCard);
+    resetBoard();
+}
+function unflipCards(){
+    lockBoard = true;
+    setTimeout(() => {
+        firstCard.classList.remove("flipped");
+        secondCard.classList.remove("flipped");
+        resetBoard();
+        }, 1000);
+    }
+
+function resetBoard(){
+    [firstCard, secondCard, lockBoard] = [null, null, false];
+}
+function unlockPioneer(){
+    pioneerApp.style.display = "block";
+    setTimeout(() => {
+        minigameOverlay.style.opacity = "0";
+        pioneerApp.style.filter = "blur(0px)";
+        setTimeout(()=>{
+            minigameOverlay.style.display = "none";
+        }, 800);
+    }, 300);
+}
 
 let songs = [];
 localforage.getItem("mySavedSongs").then(function(savedSongs){
