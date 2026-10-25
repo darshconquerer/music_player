@@ -7,6 +7,7 @@ const songs = [
 ];
 
 const songTitle = document.querySelector(".song_title");
+const songList = document.querySelector(".songs");
 const playButton = document.querySelector(".play_button");
 const nextButton = document.querySelector(".next_button");
 const prevButton = document.querySelector(".previous_button");
@@ -101,4 +102,13 @@ audio.addEventListener("ended", function(){
     }
 })
 
+for(let i = 0; i < songs.length; i++){
+    const li = document.createElement("li");
+    li.textContent = (i+1) + ". " + songs[i].title;
+    li.addEventListener("click", function(){
+        loadSong(i);
+        playSong();
+    });
+    songList.appendChild(li);
+}
 loadSong(0);
