@@ -130,7 +130,7 @@ body{
     align-items: center;
     gap: 10px;
     font-size: 12px;
-    color: rgb(154 154 181);
+    color: rgb(154 154 181)
 }
 .audio_prog_bar{
     flex: 1;
