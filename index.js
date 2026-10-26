@@ -1,5 +1,6 @@
 const comicOverlay = document.getElementById("comic_overlay");
 const minigameOverlay = document.getElementById("minigame_overlay");
+const pioneerApp = document.getElementById("pioneer_app");
 const panels = document.querySelectorAll(".comic_panel");
 const instructionText = document.querySelector(".comic_instruction");
 
@@ -111,6 +112,7 @@ function unlockPioneer(){
         pioneerApp.style.filter = "blur(0px)";
         setTimeout(()=>{
             minigameOverlay.style.display = "none";
+            pioneerApp.style.filter = "none";
         }, 800);
     }, 300);
 }
@@ -134,6 +136,10 @@ localforage.getItem("mySavedSongs").then(function(savedSongs){
     loadSong(0);
 });
 
+const volumeBar = document.getElementById("volume_bar");
+volumeBar.addEventListener("input", function(){
+    audio.volume = volumeBar.value;
+});
 const customAlert = document.getElementById("custom_alert");
 const customAlertText = document.getElementById("custom_alert_text");
 const closeAlertBtn = document.getElementById("close_alert_btn");
@@ -147,6 +153,8 @@ closeAlertBtn.addEventListener("click", function(){
     customAlert.classList.add("hidden");
 });
 
+const loopButton = document.querySelector(".loop_button");
+let isLooping = false;
 const songTitle = document.querySelector(".song_title");
 const songList = document.querySelector(".songs");
 const playButton = document.querySelector(".play_button");
@@ -215,6 +223,11 @@ function formatTime(seconds){
 playButton.addEventListener("click", togglePlay);
 nextButton.addEventListener("click", nextSong);
 prevButton.addEventListener("click", previousSong);
+loopButton.addEventListener("click" ,function(){
+    isLooping = !isLooping;
+    loopButton.classList.toggle("active", isLooping);
+});
+
 bannerPlay.addEventListener("click", function(){
     loadSong(0);
     playSong();
@@ -235,11 +248,17 @@ audio.addEventListener("loadedmetadata", function(){
     totalTime.textContent = formatTime(audio.duration);
 });
 audio.addEventListener("ended", function(){
-    if(currentSong === songs.length -1){
-        pauseSong();
+    if(isLooping){
+        audio.currentTime = 0;
+        playSong();
     }
     else{
-        nextSong();
+        if(currentSong === songs.length -1){
+            pauseSong();
+        }
+        else{
+            nextSong();
+        }
     }
 });
 

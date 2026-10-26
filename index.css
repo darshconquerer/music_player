@@ -73,20 +73,71 @@ body{
     justify-content: center;
     transition: opacity 0.8s ease;
 }
+.game_ui{
+    text-align: center;
+}
+.game_ui p{
+    color: rgb(154 154 181);
+    margin-bottom: 20px;
+}
+.memory_grid{
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    gap: 15px;
+    perspective: 1000px;
+}
+.memory_card{
+    width: 80px;
+    height: 80px;
+    background-color: rgb(37, 35, 77);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    cursor: pointer;
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.memory_card .front, .memory_card .back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.memory_card .front{
+    background-color: rgb(28, 28, 40);
+    color: rgb(154, 154, 181);
+    font-weight: bold;
+    font-size: 24px;
+}
+.memory_card.flipped{
+    transform: rotateY(180deg);
+}
+#pioneer_app{
+    transition: filter 0.8s;
+    min-height: 100vh;
+}
 
 .sidebar{
     position: fixed;
     top: 0;
     left: 0;
-    bottom: 60px;
+    bottom: 35px;
     width: 250px;
     background-color: rgb(18, 18, 24);
     padding: 24px 16px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 .sidebar-controls{
-    margin-top: auto;
     background-color: rgb(28, 28, 40);
     padding: 20px 15px;
     border-radius: 12px;
@@ -95,6 +146,31 @@ body{
     align-items: center;
     justify-content: center;
     gap: 15px;
+    flex-shrink: 0;
+}
+.volume_control{
+    margin-top: auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 0 10px;
+    color: rgb(154, 154, 181);
+    flex-shrink: 0;
+}
+.volume_slider_wrapper{
+    height:100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#volume_bar{
+    width: 130px;
+    transform: rotate(-90deg);
+    transform-origin: center;
+    accent-color: rgb(124, 92, 255);
+    cursor: pointer;
 }
 .name{
     font-size: 24px;
@@ -133,7 +209,7 @@ body{
     background-color: rgb(37, 35, 77) ;
 }
 .main-container{
-    margin: 0 0 60px 250px;
+    margin: 0 0 35px 250px;
     padding: 20px 28px;
 }
 .body{
@@ -182,7 +258,7 @@ body{
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 60px;
+    height: 35px;
     background-color: rgb(18, 18, 42);
     border-top: 1px solid rgb(30, 30, 60) ;
     display: flex;
@@ -228,6 +304,22 @@ body{
     background-color: white;
     color:black;
     cursor: pointer;
+}
+.loop_button{
+    background: none;
+
+    border: none;
+    color: rgb(154 154 181);
+    font-size: 26px;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding-bottom: 8px;
+}
+.loop_button:hover{
+    color: white;
+}
+.loop_button.active{
+    color: rgb(124, 92, 255);
 }
 .audio_bar{
     width: 100%;
