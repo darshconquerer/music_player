@@ -47,7 +47,7 @@ body{
 .comic_instruction{
     position: absolute;
     bottom: 20px;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     font-size: 16px;
     letter-spacing: 1px;
     z-index: 10001;
@@ -77,7 +77,7 @@ body{
     text-align: center;
 }
 .game_ui p{
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     margin-bottom: 20px;
 }
 .memory_grid{
@@ -106,6 +106,7 @@ body{
     width: 100%;
     height: 100%;
     border-radius: 12px;
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     display: flex;
     align-items: center;
@@ -117,10 +118,16 @@ body{
     font-weight: bold;
     font-size: 24px;
 }
+.memory_card .back{
+    transform: rotateY(180deg);
+    background-color: rgb(37, 35, 77);
+}
 .memory_card.flipped{
     transform: rotateY(180deg);
 }
+
 #pioneer_app{
+    filter: blur(10px);
     transition: filter 0.8s;
     min-height: 100vh;
 }
@@ -160,7 +167,7 @@ body{
     flex-shrink: 0;
 }
 .volume_slider_wrapper{
-    height:100px;
+    height: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,7 +192,7 @@ body{
     border-radius: 8px;
     font-size: 16px;
     font-weight: normal;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     text-decoration: none;
 }
 .navigation_option a:hover{
@@ -200,13 +207,13 @@ body{
 }
 .playlists li{
     padding: 10px 12px;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     border-radius: 8px;
     cursor: pointer;
 }
 .playlists li:hover{
     color: white;
-    background-color: rgb(37, 35, 77) ;
+    background-color: rgb(37, 35, 77);
 }
 .main-container{
     margin: 0 0 35px 250px;
@@ -248,6 +255,9 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 .songs li:hover{
     color: white;
@@ -260,7 +270,7 @@ body{
     width: 100%;
     height: 35px;
     background-color: rgb(18, 18, 42);
-    border-top: 1px solid rgb(30, 30, 60) ;
+    border-top: 1px solid rgb(30, 30, 60);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -276,6 +286,7 @@ body{
 }
 .song_title{
     font-weight: bold;
+    text-align: center;
 }
 .buttons{
     display: flex;
@@ -285,7 +296,7 @@ body{
 .previous_button, .next_button{
     background: none;
     border: none;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     font-size: 20px;
     cursor: pointer;
 }
@@ -302,14 +313,13 @@ body{
     align-items: center;
     justify-content: center;
     background-color: white;
-    color:black;
+    color: black;
     cursor: pointer;
 }
 .loop_button{
     background: none;
-
     border: none;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     font-size: 26px;
     cursor: pointer;
     transition: color 0.2s;
@@ -328,7 +338,7 @@ body{
     align-items: center;
     gap: 15px;
     font-size: 14px;
-    color: rgb(154 154 181)
+    color: rgb(154, 154, 181);
 }
 .audio_prog_bar{
     flex: 1;
@@ -341,7 +351,7 @@ body{
     margin-bottom: 16px;
     align-items: center;
 }
-.add-song-container input[type = "text"],
+.add-song-container input[type="text"],
 .add-song-container input[type="file"]{
     padding: 8px;
     border: none;
@@ -360,12 +370,12 @@ body{
     cursor: pointer;
 }
 .add-song-container button:hover{
-    background-color: rgb(200, 200, 200)
+    background-color: rgb(200, 200, 200);
 }
 .delete_btn{
     background: none;
     border: none;
-    color: rgb(154 154 181);
+    color: rgb(154, 154, 181);
     cursor: pointer;
     font-size: 12px;
     padding: 4px;
@@ -387,7 +397,7 @@ body{
     align-items: center;
     gap: 15px;
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0 , 0, 0.5);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 .custom-alert.hidden{
     display: none;
