@@ -1,3 +1,12 @@
+const originalSongs = [
+    {title: "Parda", file: "audio/song6.mp3"},
+    {title: "YOUSEEBIGGIRL", file: "audio/song1.mp3"},
+    {title: "Reflections", file: "audio/song2.mp3"},
+    {title: "Imagine", file: "audio/song3.mp3"},
+    {title: "Eyes without a face", file: "audio/song4.mp3"},
+    {title: "Swimming Pool", file: "audio/song5.mp3"},
+];
+
 const volumeBar = document.getElementById("volume_bar");
 const customAlert = document.getElementById("custom_alert");
 const customAlertText = document.getElementById("custom_alert_text");
@@ -18,10 +27,15 @@ const newSongTitle = document.getElementById("new_song_title");
 const newSongFile = document.getElementById("new_song_file");
 const addSongBtn = document.getElementById("add_song_btn");
 
+const upNextList = document.querySelector(".queue");
+const clearUpNextBtn = document.getElementById("clear_queue_btn");
+const restoreBtn = document.getElementById("restore_btn");
+
 const audio = new Audio();
 let currentSong = 0;
 let isLooping = false;
 let songs = [];
+let upNext = [];
 
 function showCustomAlert(message){
     customAlertText.textContent = message;
@@ -79,8 +93,85 @@ function togglePlay(){
     }
 }
 
+function renderUpNext(){
+    upNextList.innerHTML = "";
+
+    if(upNext.length === 0){
+        const empty = document.createElement("li");
+        empty.textContent = "Empty queue bruh"
+        empty.className = "empty";
+        upNextList.appendChild(empty);
+        return;
+    }
+    for(let i = 0; i < upNext.length; i++){
+        const li = document.createElement("li");
+        const titleSpan = document.createElement("span");
+        titleSpan.className = "queue_title";
+        titleSpan.textContent = (i+1)+ ". " + upNext[i].title;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "❌";
+        removeButton.className = "delete_btn";
+        removeButton.addEventListener("click", () => {
+            upNext.splice(i, 1);
+            renderUpNext();
+        });
+
+        li.appendChild(titleSpan);
+        li.appendChild(removeButton);
+        upNextList.appendChild(li);
+    }
+}
+
+function playedQueue(){
+    while(upNext.length > 0){
+        const song = upNext.shift();
+        const index = songs.indexOf(song);
+        if(index !== -1){
+            renderUpNext();
+            loadSong(index);
+            playSong();
+            return true;
+        }
+    }
+    renderUpNext();
+    return false;
+}
+clearUpNextBtn.addEventListener("click", () => {
+    upNext = [];
+    renderUpNext();
+}); 
+function restoreSongs(){
+    let added = 0;
+    for(let i = 0; i < originalSongs.length; i++){
+        let alreadyThere = false;
+        for(let j = 0; j < songs.length; j++){
+            if(songs[j].file === originalSongs[i].file){
+                alreadyThere = true;
+            }
+        }
+        if(!alreadyThere){
+            songs.push({title: originalSongs[i].title, file: originalSongs[i].file});
+            added++;
+        }
+    }
+    if(added === 0){
+        showCustomAlert("Songs are already there");
+        return;
+    }
+    localforage.setItem("mySavedSongs", songs).then(() => {
+        renderSongs();
+        if(!audio.src){
+            loadSong(0);
+        }
+        showCustomAlert("Got " + added + " songs back");
+    });
+}
+restoreBtn.addEventListener("click", restoreSongs);
+
 function nextSong(){
     if(songs.length === 0) return;
+    if(playedQueue()) return;
     let next = currentSong + 1;
     if(next >= songs.length){
         next = 0;
@@ -143,14 +234,13 @@ audio.addEventListener("ended", () => {
         audio.currentTime = 0;
         playSong();
     }
-    else if(currentSong === songs.length - 1){
+    else if(currentSong === songs.length - 1 && upNext.length === 0){
         pauseSong();
     }
     else{
         nextSong();
     }
 });
-
 function renderSongs(){
     songList.innerHTML = "";
     for(let i = 0; i < songs.length; i++){
@@ -158,6 +248,13 @@ function renderSongs(){
 
         const titleSpan = document.createElement("span");
         titleSpan.textContent = (i + 1) + ". " + songs[i].title;
+
+        const buttons = document.createElement("div");
+        buttons.className = "song_actions";
+        const upNextButton = document.createElement("button")
+        upNextButton.textContent = "➕";
+        upNextButton.className = "queue_btn";
+        upNextButton.title = "Add to queue";
 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "❌";
@@ -167,12 +264,22 @@ function renderSongs(){
             loadSong(i);
             playSong();
         });
-
+        upNextButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            upNext.push(songs[i]);
+            renderUpNext();
+        });
         deleteButton.addEventListener("click", (e) => {
             e.stopPropagation();
             const wasCurrent = (currentSong === i);
-            songs.splice(i, 1);
+            const removed =  songs.splice(i, 1)[0];
 
+            for(let j = upNext.length - 1; j >= 0; j--){
+                if(upNext[j] === removed){
+                    upNext.splice(j, 1);
+                }
+            }
+            
             localforage.setItem("mySavedSongs", songs).then(() => {
                 if(wasCurrent){
                     pauseSong();
@@ -181,12 +288,14 @@ function renderSongs(){
                 else if(currentSong > i){
                     currentSong--;
                 }
+                renderUpNext();
                 renderSongs();
             });
         });
-
+        buttons.appendChild(upNextButton);
+        buttons.appendChild(deleteButton);
         li.appendChild(titleSpan);
-        li.appendChild(deleteButton);
+        li.appendChild(buttons);
         songList.appendChild(li);
     }
 }
@@ -220,18 +329,16 @@ addSongBtn.addEventListener("click", () => {
 
 localforage.getItem("mySavedSongs").then((savedSongs) => {
     if(!savedSongs || savedSongs.length === 0){
-        songs = [
-            {title: "YOUSEEBIGGIRL", file: "audio/song1.mp3"},
-            {title: "Reflections", file: "audio/song2.mp3"},
-            {title: "Imagine", file: "audio/song3.mp3"},
-            {title: "Eyes without a face", file: "audio/song4.mp3"},
-            {title: "Swimming Pool", file: "audio/song5.mp3"},
-        ];
+        songs = [];
+        for(let i = 0; i < originalSongs.length; i++){
+            songs.push({title: originalSongs[i].title, file: originalSongs[i].file})
+        }
         localforage.setItem("mySavedSongs", songs);
     }
     else{
         songs = (typeof savedSongs === "string") ? JSON.parse(savedSongs) : savedSongs;
     }
     renderSongs();
+    renderUpNext();
     loadSong(0);
 });

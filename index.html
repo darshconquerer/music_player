@@ -12,7 +12,10 @@
             <div class="name">Pioneer
                 <div class="navigation_option"></div>
             </div>
-            <div class="playlist-container"></div>
+            <div class="playlist-container">
+                <h3><p class="niyet">Up Next </p><button id="clear_queue_btn" class="clear_btn">Clear</button></h3>
+                <ul class="queue"></ul>
+            </div>
             <div class="volume_control">
                 <span>🔊</span>
                 <div class="volume_slider_wrapper">
@@ -23,7 +26,7 @@
                 <div class="playing_now">
                     <div class="song_title">Choose a song</div>
                 </div>
-                <div class="icons">
+                <div class="icons"> 
                     <div class="buttons">
                         <button class="loop_button">∞</button>
                         <button class="previous_button">⏮</button>
@@ -41,6 +44,7 @@
             </div>
             <div class="song_list">
                 <h2>Songs</h2>
+                <button id = "restore_btn" class = "restore_btn">Restore defaults</button>
                 <div class="add-song-container">
                     <input type="text" id="new_song_title" placeholder="Song Title">
                     <input type="file" id="new_song_file" accept="audio/*">

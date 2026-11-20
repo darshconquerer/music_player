@@ -6,7 +6,7 @@
 
 body{
     font-family: Arial, sans-serif;
-    background-color: rgb(11, 11, 26);
+    background-color: black;
     color: white;
 }
 #pioneer_app{
@@ -19,19 +19,20 @@ body{
     left: 0;
     bottom: 35px;
     width: 250px;
-    background-color: rgb(18, 18, 24);
+    background-color: black;
     padding: 24px 16px;
     display: flex;
     flex-direction: column;
-    overflow-y: auto;
+    overflow: hidden;
+    border-right: 2px solid yellow;
 }
 .sidebar-controls{
-    background-color: rgb(28, 28, 40);
     padding: 20px 15px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px solid white;
     justify-content: center;
     gap: 15px;
     flex-shrink: 0;
@@ -42,27 +43,26 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 5px;
     padding: 0 10px;
-    color: rgb(154, 154, 181);
+    color: white;
     flex-shrink: 0;
 }
 .volume_slider_wrapper{
-    height: 100px;
+    height: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 #volume_bar{
-    width: 130px;
-    transform: rotate(-90deg);
-    transform-origin: center;
-    accent-color: rgb(124, 92, 255);
+    width: 180px;
+    accent-color: yellow;
     cursor: pointer;
 }
 .name{
     font-size: 24px;
     font-weight: bold;
+    color: yellow;
 }
 .navigation_option{
     margin-top: 24px;
@@ -73,28 +73,33 @@ body{
     border-radius: 8px;
     font-size: 16px;
     font-weight: normal;
-    color: rgb(154, 154, 181);
+    color: white;
     text-decoration: none;
 }
 .navigation_option a:hover{
-    color: white;
-    background-color: rgb(37, 35, 77);
+    color: black;
+    background-color: yellow;
 }
 .playlist-container {
     margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
 }
 .playlists{
     list-style: none;
 }
 .playlists li{
     padding: 10px 12px;
-    color: rgb(154, 154, 181);
+    color: white;
     border-radius: 8px;
     cursor: pointer;
 }
 .playlists li:hover{
-    color: white;
-    background-color: rgb(37, 35, 77);
+    color: black;
+    background-color: yellow;
 }
 .main-container{
     margin: 0 0 35px 250px;
@@ -103,7 +108,9 @@ body{
 .body{
     padding: 40px 32px;
     border-radius: 20px;
-    background: linear-gradient(135deg, rgb(43, 16, 85), rgb(123, 45, 142), rgb(255, 126, 95));
+    background-color: white;
+    color: black;
+    border: 2px solid cyan;
 }
 .body h1{
     font-size: 56px;
@@ -117,11 +124,15 @@ body{
     padding: 18px 35px;
     background-color: white;
     color: black;
-    border: none;
+    border: 1px solid black;
     border-radius: 30px;
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
+}
+.body_button:hover{
+    background-color: black;
+    color: white;
 }
 .song_list{
     margin-top: 28px;
@@ -141,8 +152,8 @@ body{
     cursor: pointer;
 }
 .songs li:hover{
-    color: white;
-    background-color: rgb(37, 35, 77);
+    color: black;
+    background-color: white;
 }
 .base{
     position: fixed;
@@ -150,8 +161,8 @@ body{
     left: 0;
     width: 100%;
     height: 35px;
-    background-color: rgb(18, 18, 42);
-    border-top: 1px solid rgb(30, 30, 60);
+    background-color: black;
+    border-top: 2px solid yellow;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -177,12 +188,12 @@ body{
 .previous_button, .next_button{
     background: none;
     border: none;
-    color: rgb(154, 154, 181);
+    color: white;
     font-size: 20px;
     cursor: pointer;
 }
 .previous_button:hover, .next_button:hover{
-    color: white;
+    color: yellow;
 }
 .play_button{
     width: 48px;
@@ -193,9 +204,13 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
+    background-color: yellow;
     color: black;
     cursor: pointer;
+    transform: translate(0, 4px);
+}
+.play_button:hover{
+    background-color: white;
 }
 .loop_button{
     background: none;
@@ -205,12 +220,13 @@ body{
     cursor: pointer;
     transition: color 0.2s;
     padding-bottom: 8px;
+    transform: translate(0, 8px);
 }
 .loop_button:hover{
     color: white;
 }
 .loop_button.active{
-    color: rgb(124, 92, 255);
+    color: cyan;
 }
 .audio_bar{
     width: 100%;
@@ -219,11 +235,11 @@ body{
     align-items: center;
     gap: 15px;
     font-size: 14px;
-    color: rgb(154, 154, 181);
+    color: white;
 }
 .audio_prog_bar{
     flex: 1;
-    accent-color: rgb(124, 92, 255);
+    accent-color: yellow;
     cursor: pointer;
 }
 .add-song-container{
@@ -237,9 +253,14 @@ body{
     padding: 8px;
     border: none;
     border-radius: 6px;
-    background-color: rgb(37, 35, 77);
+    background-color: black;
     color: white;
     font-size: 14px;
+    border: 1px solid white;
+}
+.add-song-container input[type = "text"]:focus{
+    outline: none;
+    border-color: yellow;
 }
 .add-song-container button{
     padding: 18px 16px;
@@ -251,12 +272,12 @@ body{
     cursor: pointer;
 }
 .add-song-container button:hover{
-    background-color: rgb(200, 200, 200);
+    background-color: white;
 }
 .delete_btn{
     background: none;
     border: none;
-    color: rgb(154, 154, 181);
+    color: white;
     cursor: pointer;
     font-size: 12px;
     padding: 4px;
@@ -270,7 +291,7 @@ body{
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: rgb(255, 95, 95);
+    background-color: rgb(254, 0, 0);
     color: white;
     padding: 15px 25px;
     border-radius: 8px;
@@ -278,17 +299,102 @@ body{
     align-items: center;
     gap: 15px;
     z-index: 1000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 .custom-alert.hidden{
     display: none;
 }
 .custom-alert button{
-    background: white;
-    color: black;
+    background: black;
+    color: yellow;
     border: none;
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: bold;
+}
+.playlist-container h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    color: yellow;
+    align-items: center;
+    font-size: 14px;
+}
+.clear_btn{
+    background: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid black;
+}
+.clear_btn:hover{
+    color: lightblue;
+}
+.queue{
+    list-style: none;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: yellow black;
+}
+.queue li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: white;
+}
+.queue li:hover{
+    color: black;
+    background-color: yellow;
+}
+.queue_title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.song_actions{
+    display: flex;
+    gap: 4px;
+}
+.queue_btn{
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+}
+.queue_btn:hover{
+    transform: scale(1.2);
+}
+.songs li:hover button, .queue li:hover button{
+    color: black;
+}
+.restore_btn{
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    border: 1px solid yellow;
+    border-radius: 5px;
+    background-color: black;
+    color: yellow;
+    cursor: pointer;
+}
+.restore_btn:hover{
+    background-color: yellow;
+    color: black;
+}
+
+.niyet{
+    padding-right: 50px;
+}
+.playlist-container h3{
+    flex-shrink: 0;
 }
