@@ -272,7 +272,9 @@ body{
     cursor: pointer;
 }
 .add-song-container button:hover{
-    background-color: white;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
 }
 .delete_btn{
     background: none;
